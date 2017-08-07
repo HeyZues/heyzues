@@ -45,6 +45,9 @@ Route::resource('sales', 'Sales_organController');
 Route::resource('org', 'Organizaciones');
 //Route::resource('emp', 'EmployesController');
 
+Route::get('dashboard', 'Dashboard@index');
+
+
 
 Route::get('employe/{id?}', 'EmployesController@index');
 Route::post('employe/', 'EmployesController@store');

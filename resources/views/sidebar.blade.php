@@ -1,0 +1,1 @@
+<div ng-include="'sidebar.html'" ui-track-as-search-param="true" class="sidebar sidebar-left"></div>
