@@ -18,20 +18,31 @@
    
   <form role="form" ng-submit='login()'>
     <fieldset>
-      <legend>Login</legend>
+      <legend>Obtener la primera fila</legend>
         <div class="form-group has-success has-feedback">
           <label>Email</label>
           <input type="email"
-                 ng-model="email"
+                 ng-model="emp.email"
                  class="form-control"
                  placeholder="Enter email">
         </div>
-
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="Name" ng-model="emp.name">
+        </div>
+        <div class="form-group">
+          <label>Contact</label>
+          <input type="text" 
+                 class="form-control"
+                 placeholder="Contct" ng-model="emp.contact_number">
+        </div>        
         <div class="form-group">
           <label>Password</label>
           <input type="password" 
                  class="form-control"
-                 placeholder="Password">
+                 placeholder="Password" ng-model="emp.password">
         </div>
 
         <div class="form-group">

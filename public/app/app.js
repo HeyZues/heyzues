@@ -1,10 +1,3 @@
-//var app = angular.module('employeeRecords', []);
-  //      .constant('API_URL', document.URL + 'employe');
-
-function getData(){
-    return document.URL;
-}
-
 function print_r(printthis, returnoutput) {
     var output = '';
 
