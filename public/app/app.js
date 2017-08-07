@@ -1,6 +1,9 @@
-var app = angular.module('employeeRecords', [])
-        .constant('API_URL', 'http://localhost/laravel/public/api/v1/');
+//var app = angular.module('employeeRecords', []);
+  //      .constant('API_URL', document.URL + 'employe');
 
+function getData(){
+    return document.URL;
+}
 
 function print_r(printthis, returnoutput) {
     var output = '';
@@ -17,4 +20,4 @@ function print_r(printthis, returnoutput) {
     }else {
         alert(output);
     }
-}         
+}      

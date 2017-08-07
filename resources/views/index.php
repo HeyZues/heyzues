@@ -42,15 +42,14 @@
     </fieldset>
     <hr>
 
-    <button class="btn btn-default btn-block">
+    <button type="submit" class="btn btn-default btn-block">
       Login
     </button>
 
-    <div ui-content-for="navbarAction">
-      <a class="btn" ng-click="login()">Login</a>
-    </div>
-
   </form>
+      <div ui-content-for="navbarAction">
+     <button class="btn btn-default btn-block" ng-click="action()" style="float: right;">Reset</button>
+    </div>
  </div>
 </div>
         </div>

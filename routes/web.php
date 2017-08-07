@@ -43,13 +43,21 @@ Route::get('/', function () {
 Route::resource('unidades', 'Unit_organController');
 Route::resource('sales', 'Sales_organController');
 Route::resource('org', 'Organizaciones');
+//Route::resource('emp', 'EmployesController');
 
-Route::get('/api/v1/employees/{id?}', 'EmployesController@index');
-Route::post('/api/v1/employees', 'EmployesController@store');
-Route::post('/api/v1/employees/{id}', 'EmployesController@update');
-Route::delete('/api/v1/employees/{id}', 'EmployesController@destroy');
+
+Route::get('employe/{id?}', 'EmployesController@index');
+Route::post('employe/', 'EmployesController@store');
+Route::post('employe/{id}', 'EmployesController@update');
+Route::delete('employe/{id}', 'EmployesController@destroy');
 
 Route::get('home', function() {
     return redirect('/');
+});
+
+Route::any('operador', function(){
+    $user['bernard'] = 8;
+    $user['mark'] = 9;
+	return response()->json($user['bernard'] <=> $user['mark']);               
 });
 

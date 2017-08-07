@@ -1,7 +1,8 @@
-
+var app = angular.module('employeeRecords', [])
+      .constant('API_URL', document.URL + 'employe');
 app.controller('employeesController', function($scope, $http, API_URL) {
     //retrieve employees listing from API
-    $http.get(API_URL + "employees")
+    $http.get(API_URL)
             .success(function(response) {
                 $scope.employees = response;
             });
@@ -18,10 +19,10 @@ app.controller('employeesController', function($scope, $http, API_URL) {
                 $scope.form_title = "Employee Detail";
                 $scope.id = id;
                 $http.get(API_URL + 'employees/' + id)
-                        .success(function(response) {
-                            alert(response);
-                            $scope.employee = response;
-                        });
+                    .success(function(response) {
+                        alert(response);
+                        $scope.employee = response;
+                    });
                 break;
             default:
                 break;
@@ -31,22 +32,26 @@ app.controller('employeesController', function($scope, $http, API_URL) {
     }
 
     $scope.login = function(){
+       alert('submit form');
+    }
+
+    $scope.action = function(){
         //retrieve employees listing from API
-        $http.get(API_URL + "employees")
+        $http.get('http://localhost:8000/employe')
             .success(function(response) {
             $scope.employees = response;
+            alert(response[0].contact_number);
 
-            angular.forEach(response, function (value, key) {
+          /*  angular.forEach(response, function (value, key) {
                alert(response[key].email);        
-            });
+            });*/
 
         });
     }
 
-
     //save new record / update existing record
     $scope.save = function(modalstate, id) {
-        var url = API_URL + "employees";
+        var url = API_URL;
         
         //append employee id to the URL if the form is in edit mode
         if (modalstate === 'edit'){
