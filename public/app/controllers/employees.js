@@ -1,6 +1,9 @@
 var app = angular.module('employeeRecords', [])
       .constant('API_URL', document.URL + 'employe');
-app.controller('employeesController', function($scope, $http, API_URL) {
+app.controller('employeesController', function($scope, $http, API_URL, $location) {
+ //$location.path() http://localhost/laravel/public/employe
+var global_base_url = $location.absUrl().split('?')[0];
+
     //retrieve employees listing from API
     $http.get(API_URL)
             .success(function(response) {
@@ -37,7 +40,7 @@ app.controller('employeesController', function($scope, $http, API_URL) {
 
     $scope.action = function(){
         //retrieve employees listing from API
-        $http.get('http://localhost:8000/employe')
+      $http.get(global_base_url + 'employe')
             .success(function(response) {
             $scope.employees = response;
             alert(response[0].contact_number);
@@ -45,7 +48,6 @@ app.controller('employeesController', function($scope, $http, API_URL) {
           /*  angular.forEach(response, function (value, key) {
                alert(response[key].email);        
             });*/
-
         });
     }
 
