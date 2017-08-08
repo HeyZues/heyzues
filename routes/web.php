@@ -35,6 +35,15 @@ Route::any('fusion/{id}', function(int $id) {
 
 //accediendo aun metodo en especifico
 Route::get('controlador', 'Organizaciones@index');
+
+Route::any('operador', function(){
+    $user['bernard'] = 8;
+    $user['mark'] = 9;
+	return response()->json($user['bernard'] <=> $user['mark']);               
+});
+
+
+
 */
 Route::get('/', function () {
     return view('index');
@@ -56,11 +65,5 @@ Route::delete('employe/{id}', 'EmployesController@destroy');
 
 Route::get('home', function() {
     return redirect('/');
-});
-
-Route::any('operador', function(){
-    $user['bernard'] = 8;
-    $user['mark'] = 9;
-	return response()->json($user['bernard'] <=> $user['mark']);               
 });
 

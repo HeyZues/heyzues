@@ -48,7 +48,8 @@
             @component('alerts')
                 <strong>Whoops!</strong> Something went wrong!
             @endcomponent
-Hello, {{ $name }}.                      
+              Hello, {{ $saludo }}. </br>                     
+              Hello, <% saludo %>.                      
             <ng-view></ng-view>
           </div>
         </div>

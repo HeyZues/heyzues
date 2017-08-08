@@ -1,8 +1,14 @@
 /* eslint no-alert: 0 */
 'use strict';
-var app = angular.module('ZuesApp', ['ngRoute','mobile-angular-ui','mobile-angular-ui.gestures']);
+//var app = angular.module('ZuesApp', ['ngRoute','mobile-angular-ui','mobile-angular-ui.gestures']);
+var app = angular.module('ZuesApp', ['ngRoute','mobile-angular-ui','mobile-angular-ui.gestures'], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    });
+
 app.controller('ZuesCtrl', function($rootScope, $scope) {
- alert('Hello From MainController');
+ $scope.saludo = ('Fom MainController JS');
+ //alert($scope.saludo);
 
   // User agent displayed in home page
   $scope.userAgent = navigator.userAgent;
