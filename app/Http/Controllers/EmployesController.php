@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class EmployesController extends Controller
 {
+
+    public function showView()
+    {
+        $my_array = ["title"=>"some_title","content"=>"some_content"];
+        return view("employes/nuevo", ['title' => 'Nuevo Empleado']);
+    }        
     /**
      * Display a listing of the resource.
      *

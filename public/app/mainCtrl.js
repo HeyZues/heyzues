@@ -1,35 +1,64 @@
 'use strict';
-var app = angular.module('ZuesApp', ['ngRoute','mobile-angular-ui','mobile-angular-ui.gestures'], function($interpolateProvider) {
+var app = angular.module('ZuesApp', ['ngRoute','mobile-angular-ui','mobile-angular-ui.gestures', 
+  'ui.grid.selection', 'ui.grid', 'ui.grid.exporter', 'ui.grid.pagination'], function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
     });
 
 app.controller('ZuesCtrl', function($rootScope, $scope, $location) {
-  //$location.absUrl().split('?')[0];
-  // User agent displayed in home page
+ // $scope.global_base_url = $location.absUrl().split('?')[0];
   $scope.userAgent = navigator.userAgent;
-  // Needed for the loading screen
-  $rootScope.$on('$routeChangeStart', function() {
-    $rootScope.loading = true;
-  });
-
-  $rootScope.$on('$routeChangeSuccess', function() {
-    $rootScope.loading = false;
-  });
-
-  $rootScope.Ui.turnOn('modal1');
-  $rootScope.Ui.turnOn('modal2');
-  SharedState.turnOn('modal2');
+  $rootScope.$on('$routeChangeStart', function() { $rootScope.loading = true;  });
+  $rootScope.$on('$routeChangeSuccess', function() { $rootScope.loading = false; });
 
 });// Fin Controller
 
-app.run(function($transform) {  window.$transform = $transform; });
 
+app.controller('EmpleadosCtrl',function($scope, $location, $http){
+
+   $scope.loadData = function () {
+      $http.get(global_base_url + 'employe').success(function(data, status, headers, config) {
+        $scope.employees.data = data;
+      }).error(function(data, status, headers, config) {
+        // log error
+      });
+  }
+
+  $scope.employees = {
+    enableFiltering: true,
+    enableRowSelection: true,
+    enableRowHeaderSelection: false,
+    modifierKeysToMultiSelect: true,
+    multiSelect: true,
+    columnDefs: [
+      { field: 'name', displayName: 'Nombre', visible: true }, //0
+      { field: 'email', visible: true }, //1
+      { field: 'contact_number',  displayName: 'Contacto', visible: true }, //1
+    ],
+    onRegisterApi: function(gridApi){
+      $scope.gridApi = gridApi;
+      gridApi.selection.on.rowSelectionChanged($scope,function(rows){
+        $scope.myClickHandler(gridApi.selection.getSelectedRows());
+      });
+    },
+    //   showGridFooter: true,
+  };
+
+
+});
+
+
+
+
+
+
+
+
+app.run(function($transform) {  window.$transform = $transform; });
 /*Configuracion del router*/
 app.config(function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'home.html', reloadOnSearch: false});
 });
-
 
 // `$touch example`
 //

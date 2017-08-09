@@ -49,6 +49,7 @@ Route::resource('sales', 'Sales_organController');
 Route::resource('org', 'Organizaciones');
 //Route::resource('emp', 'EmployesController');
 
+/*Ejemplos*/
 Route::get('/', 'Dashboard@index');
 Route::get('tabs', 'Dashboard@tabs');
 Route::get('toggle', 'Dashboard@toggle');
@@ -58,11 +59,10 @@ Route::get('touch', 'Dashboard@touch');
 Route::get('drag', 'Dashboard@drag');
 Route::get('overlay', 'Dashboard@overlay');
 
-/*
-Route::any('{path?}', function(){
-    return File::get(public_path() . '\app\home.html');
-})->where("path", ".+");
-*/
+/*Empleados*/
+Route::get('empleados', 'Dashboard@empleados');
+Route::get('employes', 'EmployesController@showView');
+
 
 
 

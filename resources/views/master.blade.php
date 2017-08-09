@@ -11,7 +11,9 @@
         {!! Html::style('css/mobile-angular-ui-hover.min.css') !!}
         {!! Html::style('css/mobile-angular-ui-base.min.css') !!}
         {!! Html::style('css/mobile-angular-ui-desktop.less') !!}
+        {!! Html::style('css/ui-grid.min.css') !!}
         {!! Html::style('css/demo.css') !!}
+        {!! Html::style('css/floating.css') !!}
     </head>
     <body ng-app="ZuesApp" ng-controller="ZuesCtrl" ui-prevent-touchmove-defaults>
         @component('sidebar')
@@ -43,9 +45,7 @@
 
 
         <div class="navbar navbar-app navbar-absolute-bottom">
-
             <pre><%userAgent%></pre>
-
         </div>
 
           <!-- App Body -->
@@ -110,7 +110,8 @@
         <script src="<?= asset('app/lib/angular/angular.min.js') ?>"></script>
         <script src="<?= asset('js/angular-route.min.js') ?>"></script>
         <script src="<?= asset('js/mobile-angular-ui.min.js') ?>"></script>
-        <script src="<?= asset('js/mobile-angular-ui.gestures.min.js') ?>"></script>    
+        <script src="<?= asset('js/mobile-angular-ui.gestures.min.js') ?>"></script>  
+        <script src="<?= asset('js/ui-grid.min.js') ?>"></script>  
         <script src="<?= asset('app/app.js') ?>"></script>
         <script src="<?= asset('app/mainCtrl.js') ?>"></script>
 

@@ -61,6 +61,13 @@ class Dashboard extends Controller {
         $my_array = ["title"=>"some_title","content"=>"some_content"];
         return view("examples/overlay", ['saludo' => 'From Laravel Controller']);
 
-    }                   
+    }
+
+    public function empleados()
+    {
+        $my_array = ["title"=>"some_title","content"=>"some_content"];
+        return view("employes/empleados", ['title' => 'Empleados']);
+
+    }                         
 
 }

@@ -1,3 +1,6 @@
+var global_base_url = location.protocol + '//' + location.host + '/';
+
+
 function print_r(printthis, returnoutput) {
     var output = '';
 
@@ -14,3 +17,4 @@ function print_r(printthis, returnoutput) {
         alert(output);
     }
 }      
+
