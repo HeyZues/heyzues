@@ -41,20 +41,28 @@ Route::any('operador', function(){
     $user['mark'] = 9;
 	return response()->json($user['bernard'] <=> $user['mark']);               
 });
-
-
-
 */
-Route::get('/', function () {
-    return view('index');
-});
+//Route::get('/', function () {   return view('examples/home'); });
 //controladorRESFUL
 Route::resource('unidades', 'Unit_organController');
 Route::resource('sales', 'Sales_organController');
 Route::resource('org', 'Organizaciones');
 //Route::resource('emp', 'EmployesController');
 
-Route::get('dashboard', 'Dashboard@index');
+Route::get('/', 'Dashboard@index');
+Route::get('tabs', 'Dashboard@tabs');
+Route::get('toggle', 'Dashboard@toggle');
+Route::get('forms', 'Dashboard@forms');
+Route::get('accordion', 'Dashboard@accordion');
+Route::get('touch', 'Dashboard@touch');
+Route::get('drag', 'Dashboard@drag');
+Route::get('overlay', 'Dashboard@overlay');
+
+/*
+Route::any('{path?}', function(){
+    return File::get(public_path() . '\app\home.html');
+})->where("path", ".+");
+*/
 
 
 
