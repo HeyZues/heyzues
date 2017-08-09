@@ -18,6 +18,10 @@
             SideBar Here
         @endcomponent
 
+        @component('options')
+            Options Bar Here
+        @endcomponent      
+
       <div class="app" ui-swipe-right="Ui.turnOn('uiSidebarLeft')" ui-swipe-left="Ui.turnOff('uiSidebarLeft')">
         <!-- Navbars -->
         <div class="navbar navbar-app navbar-absolute-top">
@@ -31,16 +35,17 @@
           </div>
           <div class="btn-group pull-right" ui-yield-to="navbarAction">
             <div ui-toggle="uiSidebarRight" class="btn sidebar-right-toggle">
-              <i class="fa fa-comment"></i> Chat
+              <i class="fa fa-ellipsis-v"></i>
             </div>
+
           </div>
         </div>
 
 
         <div class="navbar navbar-app navbar-absolute-bottom">
-          <div class="btn-group justified">
-            © 2009 Joel Friedlander
-          </div>
+
+            <pre><%userAgent%></pre>
+
         </div>
 
           <!-- App Body -->
@@ -99,6 +104,7 @@
 </div>    
   </div>
 </div>
+
 
         <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->
         <script src="<?= asset('app/lib/angular/angular.min.js') ?>"></script>
