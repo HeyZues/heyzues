@@ -2,7 +2,7 @@ var app = angular.module('employeeRecords', [])
       .constant('API_URL', document.URL + 'employe');
 app.controller('employeesController', function($scope, $http, API_URL, $location) {
 var global_base_url = $location.absUrl().split('?')[0];
- $scope.emp = {};
+ $scope.emp = { };
 
     //retrieve employees listing from API
     $http.get(API_URL)

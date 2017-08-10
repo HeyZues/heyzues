@@ -61,7 +61,7 @@ Route::get('overlay', 'Dashboard@overlay');
 
 /*Empleados*/
 Route::get('empleados', 'Dashboard@empleados');
-Route::get('employes', 'EmployesController@showView');
+Route::get('nuevo_emp', 'EmployesController@showView');
 
 
 

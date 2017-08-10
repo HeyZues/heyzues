@@ -32,6 +32,7 @@ app.controller('EmpleadosCtrl',function($scope, $location, $http){
     modifierKeysToMultiSelect: true,
     multiSelect: true,
     columnDefs: [
+      { field: 'id', displayName: 'id', visible: true }, //0
       { field: 'name', displayName: 'Nombre', visible: true }, //0
       { field: 'email', visible: true }, //1
       { field: 'contact_number',  displayName: 'Contacto', visible: true }, //1
@@ -39,24 +40,32 @@ app.controller('EmpleadosCtrl',function($scope, $location, $http){
     onRegisterApi: function(gridApi){
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope,function(rows){
-        $scope.myClickHandler(gridApi.selection.getSelectedRows());
+        alert(gridApi.selection.getSelectedRows()[0].id);   
       });
     },
     //   showGridFooter: true,
   };
 
-  $scope.saveEmpoyee = function(){
-    alert($scope.emp.name);
-
-    $http({
-      url : urlAutorizaciones + 'guardarAutorizacion',
-      method : "POST",
-      data : $scope.autorizarObj,
-    }).success(function(data) {
-      $scope.verAutorizadas(3);
-    }).finally(function () {
-      $('#btnAuto').addClass('tile-btn-active');
-    });     
+  $scope.saveEmpoyee = function(id){
+    var url = global_base_url + 'employe';
+  //  alert($scope.emp.name);
+			if (typeof(id) != 'undefined') {
+        url += "/" + id;
+			} 
+        $http({
+            method: 'POST',
+            url: url,
+            data : $scope.emp,
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).success(function(response){
+            alert(response);
+            //location.reload();
+        }).error(function(response) {
+            alert(response);
+            alert('This is embarassing. An error has occured. Please check the log for details');
+        }).finally(function () {
+          $('#btnAuto').addClass('tile-btn-active');
+        });   
   }
 
   $scope.Cancelar = function(){

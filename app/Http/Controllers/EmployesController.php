@@ -4,6 +4,8 @@ namespace HeyZues\Http\Controllers;
 
 use HeyZues\Employes;
 use Illuminate\Http\Request;
+use DB;
+use Exception;
 
 class EmployesController extends Controller
 {
@@ -32,19 +34,31 @@ class EmployesController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request) {
+    public function store() {
         $Employes = new Employes;
-         $obj = json_decode(file_get_contents("php://input"));
-         return json_encode($obj); 
+        $obj = json_decode(file_get_contents("php://input"));
+        $obj->position = 1;
 
-     /*   $Employes->name = $request->input('name');
-        $Employes->email = $request->input('email');
-        $Employes->contact_number = $request->input('contact_number');
-        $Employes->position = $request->input('position');
-        $Employes->save();
-
-        return 'Employes record successfully created with id ' . $Employes->id;
+        /*
+        METODO 1
+        try {
+            $obj = json_decode(json_encode($obj), True);
+            DB::table('employees')->insert([$obj]);
+            return 'Employes record successfully';
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
         */
+        $Employes->name = $obj->name;
+        $Employes->email = $obj->email;
+        $Employes->contact_number = $obj->contact_number;
+        $Employes->position = $obj->position;
+        try {
+            $Employes->save();
+            return 'Employes record successfully created with id ' . $Employes->id;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }        
     }
 
     /**

@@ -42,5 +42,6 @@
       <div ui-grid-selection ng-init="loadData()" external-scopes="gridHandlers" ui-grid="employees" class="grid"></div>
     </div>
   </div>
+	
 </div>
 @endsection

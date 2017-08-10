@@ -20,7 +20,7 @@
             SideBar Here
         @endcomponent
 
-        @component('options')
+        @component('employes/options')
             Options Bar Here
         @endcomponent      
 

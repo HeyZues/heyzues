@@ -56,7 +56,10 @@
   </div>
 </div>
 
-
+		    <div ui-content-for="navbarAction">
+		      <!-- <i class="fa fa-reply-all" aria-hidden="true"></i> -->
+		      <a class="btn" ng-click="login()">Salir</a>
+		    </div>
 
   </div>
  </div>
