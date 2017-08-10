@@ -34,14 +34,17 @@ class EmployesController extends Controller
      */
     public function store(Request $request) {
         $Employes = new Employes;
+         $obj = json_decode(file_get_contents("php://input"));
+         return json_encode($obj); 
 
-        $Employes->name = $request->input('name');
+     /*   $Employes->name = $request->input('name');
         $Employes->email = $request->input('email');
         $Employes->contact_number = $request->input('contact_number');
         $Employes->position = $request->input('position');
         $Employes->save();
 
         return 'Employes record successfully created with id ' . $Employes->id;
+        */
     }
 
     /**

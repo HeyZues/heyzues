@@ -15,6 +15,7 @@ app.controller('ZuesCtrl', function($rootScope, $scope, $location) {
 
 
 app.controller('EmpleadosCtrl',function($scope, $location, $http){
+   $scope.emp = {};
 
    $scope.loadData = function () {
       $http.get(global_base_url + 'employe').success(function(data, status, headers, config) {
@@ -44,6 +45,23 @@ app.controller('EmpleadosCtrl',function($scope, $location, $http){
     //   showGridFooter: true,
   };
 
+  $scope.saveEmpoyee = function(){
+    alert($scope.emp.name);
+
+    $http({
+      url : urlAutorizaciones + 'guardarAutorizacion',
+      method : "POST",
+      data : $scope.autorizarObj,
+    }).success(function(data) {
+      $scope.verAutorizadas(3);
+    }).finally(function () {
+      $('#btnAuto').addClass('tile-btn-active');
+    });     
+  }
+
+  $scope.Cancelar = function(){
+    $scope.emp = {};
+  }
 
 });
 

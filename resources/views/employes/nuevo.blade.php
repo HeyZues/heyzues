@@ -19,7 +19,7 @@
           <h3 class="panel-title">Datos Generales</h3>
         </div>
 		<div class="panel-body">
-		  <form role="form" ng-submit='login()'>
+		  <form role="form" ng-submit='saveEmpoyee()'>
 		    <fieldset>
 		        <div class="form-group has-success has-feedback">
 		          <label>Nombre</label>
@@ -46,7 +46,7 @@
 		    <button class="btn btn-primary">
 		      Guardar
 		    </button>
-		    <button class="btn btn-danger">
+		    <button type="button" class="btn btn-danger" ng-click="Cancelar()">
 		      Cancelar
 		    </button>
 		    <div ui-content-for="navbarAction">
