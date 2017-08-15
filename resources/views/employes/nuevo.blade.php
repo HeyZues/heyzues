@@ -9,17 +9,26 @@
   <div class="scrollable-content">
       <legend>{{ $title }}</legend>
     <div class="section">
+<ul class="breadcrumb">
+  <li><a href="{!!URL::to('/')!!}">Inicio</a></li>
+  <li><a href="{!!URL::to("/".$pmethod)!!}">{{$parent}}</a></li>
+  <li><a href="{{$method}}">{{$title}}</a></li>
+  <li>{{$subtitle . ' [' . $id . ']'}}</li>
+</ul>
+	<div ng-show="response.msj" class="<%response.clase%>">
+		<a href="#" class="close" ng-click="dismis()" aria-label="close">&times;</a><strong></strong><%response.msj%>
+	</div>   
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="btn-group pull-right">
-            <a ui-turn-on="myDropdown<%idx%>" class="btn">
-              <i class="fa fa-id-card-o"></i>
+            <a ui-turn-on="#" class="btn">
+              <i class="fa fa-angle-double-down"></i>
             </a>
           </div>
-          <h3 class="panel-title">Datos Generales</h3>
+          <h3 class="panel-title" ng-init='loadData({{ $id }})'>Datos Generales</h3>
         </div>
 		<div class="panel-body">
-		  <form role="form" ng-submit='saveEmpoyee()'>
+		  <form role="form" ng-submit='saveEmpoyee({{ $id }})'>
 		    <fieldset>
 		        <div class="form-group has-success has-feedback">
 		          <label>Nombre</label>
@@ -46,7 +55,7 @@
 		    <button class="btn btn-primary">
 		      Guardar
 		    </button>
-		    <button type="button" class="btn btn-danger" ng-click="Cancelar()">
+		    <button type="button" class="btn btn-danger" ng-click="loadData({{ $id }})">
 		      Cancelar
 		    </button>
 		    <div ui-content-for="navbarAction">

@@ -6,14 +6,26 @@ use HeyZues\Employes;
 use Illuminate\Http\Request;
 use DB;
 use Exception;
+use HeyZues\Classes\Common;
 
 class EmployesController extends Controller
 {
-
-    public function showView()
+    
+    public function empleados()
     {
-        $my_array = ["title"=>"some_title","content"=>"some_content"];
-        return view("employes/nuevo", ['title' => 'Nuevo Empleado']);
+        return view("employes/empleados", ['parent' => 'Empleados', 'title' => 'Empleados', 'subtitle' => 'Listado', "method" => 'empleados', "id"=>null]);
+    }  
+
+    public function showView($id = null)
+    {
+        if ($id == null) {
+        $id = DB::table('employees')->max('id') + 1;
+        $my_array = ['parent' => 'Empleados', "pmethod" => 'empleados', "title"=>"Nuevo Empleado", "title"=>"Nuevo Empleado",'subtitle' => 'Nuevo', "method" => $id, "id"=>$id];            
+        }else {
+        $my_array = ['parent' => 'Empleados', "pmethod" => 'empleados', "title"=>"Editar Empleado", "title"=>"Editar Empleado",'subtitle' => 'Edición', "method" => $id, "id"=>$id];
+        }
+        return view("employes/nuevo", [$my_array][0]);
+       // return print_r($my_array);
     }        
     /**
      * Display a listing of the resource.
@@ -21,10 +33,28 @@ class EmployesController extends Controller
      * @return Response
      */
     public function index($id = null) {
+        $com = new Common();
+
         if ($id == null) {
-            return Employes::orderBy('id', 'asc')->get();
+            try {
+                return Employes::orderBy('id', 'asc')->get();
+            } catch (\Exception $e) {
+                if($com->getError($e->getCode())){
+                    return $com->getError($e->getCode());
+                } else {
+                    return $e->getMessage();
+                }               
+            }     
         } else {
-            return $this->show($id);
+            try {
+                return $this->show($id);
+            } catch (\Exception $e) {
+                if($com->getError($e->getCode())){
+                    return $com->getError($e->getCode());
+                } else {
+                    return $e->getMessage();
+                }               
+            } 
         }
     }
 
@@ -80,11 +110,13 @@ class EmployesController extends Controller
      */
     public function update(Request $request, $id) {
         $Employes = Employes::find($id);
+        $obj = json_decode(file_get_contents("php://input"));
+        $obj->position = 1;
 
-        $Employes->name = $request->input('name');
-        $Employes->email = $request->input('email');
-        $Employes->contact_number = $request->input('contact_number');
-        $Employes->position = $request->input('position');
+        $Employes->name = $obj->name;
+        $Employes->email = $obj->email;
+        $Employes->contact_number = $obj->contact_number;
+        $Employes->position = $obj->position;
         $Employes->save();
 
         return "Sucess updating user #" . $Employes->id;
@@ -96,11 +128,11 @@ class EmployesController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function destroy(Request $request) {
-        $Employes = Employes::find($request->input('id'));
+    public function destroy($id) {
+        $Employes = Employes::find($id);
 
         $Employes->delete();
 
-        return "Employes record successfully deleted #" . $request->input('id');
+        return "Employes record successfully deleted #" . $id;
     }
 }

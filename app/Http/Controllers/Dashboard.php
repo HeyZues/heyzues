@@ -63,11 +63,6 @@ class Dashboard extends Controller {
 
     }
 
-    public function empleados()
-    {
-        $my_array = ["title"=>"some_title","content"=>"some_content"];
-        return view("employes/empleados", ['title' => 'Empleados']);
-
-    }                         
+      
 
 }

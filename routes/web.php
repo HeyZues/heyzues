@@ -60,8 +60,8 @@ Route::get('drag', 'Dashboard@drag');
 Route::get('overlay', 'Dashboard@overlay');
 
 /*Empleados*/
-Route::get('empleados', 'Dashboard@empleados');
-Route::get('nuevo_emp', 'EmployesController@showView');
+Route::get('empleados', 'EmployesController@empleados');
+Route::get('empleado/{id?}', 'EmployesController@showView');
 
 
 

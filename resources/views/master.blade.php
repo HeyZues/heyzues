@@ -14,6 +14,7 @@
         {!! Html::style('css/ui-grid.min.css') !!}
         {!! Html::style('css/demo.css') !!}
         {!! Html::style('css/floating.css') !!}
+
     </head>
     <body ng-app="ZuesApp" ng-controller="ZuesCtrl" ui-prevent-touchmove-defaults>
         @component('sidebar')
@@ -43,7 +44,6 @@
           </div>
         </div>
 
-
         <div class="navbar navbar-app navbar-absolute-bottom">
             <pre><%userAgent%></pre>
         </div>
@@ -59,51 +59,6 @@
 
       </div><!-- ~ .app -->
 
-<div ui-yield-to="modals"></div>
-<div ui-content-for="modals">
-  <div id="modal1">
-<div class="modal" ui-if="modal1" ui-shared-state="modal1">
-  <div class="modal-backdrop in"></div>
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button class="close" 
-                ui-turn-off="modal1">&times;</button>
-        <h4 class="modal-title">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        <p><%lorem%></p>
-      </div>
-      <div class="modal-footer">
-        <button ui-turn-off="modal1" class="btn btn-default">Close</button>
-        <button ui-turn-off="modal1" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-    
-  </div>
-  <div id="modal2">
-<div class="modal modal-overlay" ui-if="modal2" ui-shared-state="modal2">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button class="close"
-                ui-turn-off="modal2">&times;</button>
-        <h4 class="modal-title">Overlay title</h4>
-      </div>
-      <div class="modal-body">
-        <p><%lorem%></p>
-      </div>
-      <div class="modal-footer">
-        <button ui-turn-off="modal2" class="btn btn-default">Close</button>
-        <button ui-turn-off="modal2" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>    
-  </div>
-</div>
 
 
         <!-- Load Javascript Libraries (AngularJS, JQuery, Bootstrap) -->

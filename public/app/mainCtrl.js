@@ -8,29 +8,46 @@ var app = angular.module('ZuesApp', ['ngRoute','mobile-angular-ui','mobile-angul
 app.controller('ZuesCtrl', function($rootScope, $scope, $location) {
  // $scope.global_base_url = $location.absUrl().split('?')[0];
   $scope.userAgent = navigator.userAgent;
+  $scope.response = {};
   $rootScope.$on('$routeChangeStart', function() { $rootScope.loading = true;  });
   $rootScope.$on('$routeChangeSuccess', function() { $rootScope.loading = false; });
+
 
 });// Fin Controller
 
 
-app.controller('EmpleadosCtrl',function($scope, $location, $http){
+app.controller('EmpleadosCtrl',function($rootScope, $scope, $location, $http){
    $scope.emp = {};
-
-   $scope.loadData = function () {
-      $http.get(global_base_url + 'employe').success(function(data, status, headers, config) {
+  $scope.response = {};
+   $scope.loadData = function (id) {
+    $rootScope.loading = true;
+    if (typeof(id) != 'undefined') {
+      $http.get(global_base_url + 'employe/' + id).success(function(data, status, headers, config) {
+        $rootScope.loading = false;
         $scope.employees.data = data;
+        $scope.emp = data;
+        if(!data[0].id ) {
+          $scope.set_flashdata(data, 'alert alert-success');
+        }
       }).error(function(data, status, headers, config) {
-        // log error
+          $scope.set_flashdata(data, 'alert alert-success');
       });
+    }
   }
 
   $scope.employees = {
+  /*  enableFiltering: true,
+    enableRowSelection: true,
+    enableSelectAll: false,
+    selectionRowHeaderWidth: 35,
+    rowHeight: 35,
+    showGridFooter:true, 
+  */
     enableFiltering: true,
     enableRowSelection: true,
     enableRowHeaderSelection: false,
     modifierKeysToMultiSelect: true,
-    multiSelect: true,
+    multiSelect: true,  
     columnDefs: [
       { field: 'id', displayName: 'id', visible: true }, //0
       { field: 'name', displayName: 'Nombre', visible: true }, //0
@@ -40,7 +57,8 @@ app.controller('EmpleadosCtrl',function($scope, $location, $http){
     onRegisterApi: function(gridApi){
       $scope.gridApi = gridApi;
       gridApi.selection.on.rowSelectionChanged($scope,function(rows){
-        alert(gridApi.selection.getSelectedRows()[0].id);   
+        //alert(gridApi.selection.getSelectedRows()[0].id);
+          $scope.emp = gridApi.selection.getSelectedRows();         
       });
     },
     //   showGridFooter: true,
@@ -58,19 +76,58 @@ app.controller('EmpleadosCtrl',function($scope, $location, $http){
             data : $scope.emp,
             headers: {'Content-Type': 'application/x-www-form-urlencoded'}
         }).success(function(response){
-            alert(response);
+            $scope.set_flashdata(response, 'alert alert-success');
             //location.reload();
         }).error(function(response) {
-            alert(response);
-            alert('This is embarassing. An error has occured. Please check the log for details');
+            $scope.set_flashdata(response, 'alert alert-danger');
         }).finally(function () {
           $('#btnAuto').addClass('tile-btn-active');
         });   
   }
 
-  $scope.Cancelar = function(){
-    $scope.emp = {};
+    //delete record
+    $scope.confirmDelete = function() {
+        var isConfirmDelete = confirm('Are you sure you want this record?');
+        if (isConfirmDelete) {
+            $http({
+                method: 'DELETE',
+                url: global_base_url + 'employe/' + $scope.emp[0].id
+            }).
+                    success(function(response) {
+                        $scope.set_flashdata(response, 'alert alert-success');
+                        $scope.loadData('');
+                    }).
+                    error(function(response) {
+                        $scope.set_flashdata(response, 'alert alert-danger');
+                        //slocation.reload();
+                    });
+        } else {
+            return false;
+        }
+    }  
+
+
+  $scope.nuevo = function(){
+    window.location.href = global_base_url + 'empleado/';
   }
+
+  $scope.editar = function(){
+     window.location.href = global_base_url + 'empleado/' + $scope.emp[0].id;
+  }
+
+  $scope.Cancelar = function(){
+   // $scope.emp = {};
+  }
+
+  $scope.dismis = function(){
+    $scope.response.clase = "";
+    $scope.response.msj = "";
+  }
+
+  $scope.set_flashdata = function(data, clase){
+    $scope.response.clase = clase;
+    $scope.response.msj = data;
+  }  
 
 });
 
