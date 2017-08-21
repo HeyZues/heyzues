@@ -19,7 +19,7 @@ class EmployesController extends Controller
     public function showView($id = null)
     {
         if ($id == null) {
-        $id = DB::table('employees')->max('id') + 1;
+       // $id = DB::table('employees')->max('id') + 1;
         $my_array = ['parent' => 'Empleados', "pmethod" => 'empleados', "title"=>"Nuevo Empleado", "title"=>"Nuevo Empleado",'subtitle' => 'Nuevo', "method" => $id, "id"=>$id];            
         }else {
         $my_array = ['parent' => 'Empleados', "pmethod" => 'empleados', "title"=>"Editar Empleado", "title"=>"Editar Empleado",'subtitle' => 'Edición', "method" => $id, "id"=>$id];

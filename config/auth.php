@@ -68,6 +68,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => HeyZues\User::class,
+           // 'model' => HeyZues\Models\User::class,
         ],
 
         // 'users' => [

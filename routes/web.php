@@ -1,54 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-/*
-Route::get('/', function () {
-    //return view('welcome');
-	return 'hola oso!';
-});
-
-Route::get('prueba/{id}', function () {
-	$foobar = ['foo' => 0, 'bar' => 'baz'];
-	return response()->json($foobar)
-	->header('Content-Type', 'application/json');                  
-});
-
-Route::any('operador', function() {
-    $user['bernard'] = 8;
-    $user['mark'] = 9;
-	return response()->json($user['bernard'] <=> $user['mark']);               
-});
-
-//declare(strict_types=1);
-Route::any('fusion/{id}', function(int $id) {
-	return $id + 5;
-});
-
-//accediendo aun metodo en especifico
-Route::get('controlador', 'Organizaciones@index');
-
-Route::any('operador', function(){
-    $user['bernard'] = 8;
-    $user['mark'] = 9;
-	return response()->json($user['bernard'] <=> $user['mark']);               
-});
-*/
-//Route::get('/', function () {   return view('examples/home'); });
-//controladorRESFUL
-Route::resource('unidades', 'Unit_organController');
-Route::resource('sales', 'Sales_organController');
-Route::resource('org', 'Organizaciones');
-//Route::resource('emp', 'EmployesController');
-
 /*Ejemplos*/
 Route::get('/', 'Dashboard@index');
 Route::get('tabs', 'Dashboard@tabs');
@@ -60,16 +11,24 @@ Route::get('drag', 'Dashboard@drag');
 Route::get('overlay', 'Dashboard@overlay');
 
 /*Empleados*/
+// vistas
 Route::get('empleados', 'EmployesController@empleados');
 Route::get('empleado/{id?}', 'EmployesController@showView');
-
-
-
-
+// REST
 Route::get('employe/{id?}', 'EmployesController@index');
 Route::post('employe/', 'EmployesController@store');
 Route::post('employe/{id}', 'EmployesController@update');
 Route::delete('employe/{id}', 'EmployesController@destroy');
+
+/*Acceso*/
+Route::any('auth/register', 'UserController@register');
+Route::any('auth/login', 'UserController@login');
+Route::any('auth/authenticate', 'UserController@authenticate');
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('user', 'UserController@getAuthUser');
+});
+
+
 
 Route::get('home', function() {
     return redirect('/');

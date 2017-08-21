@@ -27,27 +27,26 @@ app.controller('EmpleadosCtrl',function($rootScope, $scope, $location, $http){
         $scope.employees.data = data;
         $scope.emp = data;
         if(!data[0].id ) {
-          $scope.set_flashdata(data, 'alert alert-success');
+          $scope.set_flashdata(data, 'alert alert-danger');
         }
       }).error(function(data, status, headers, config) {
-          $scope.set_flashdata(data, 'alert alert-success');
+          $scope.set_flashdata(data, 'alert alert-danger');
       });
     }
   }
 
   $scope.employees = {
-  /*  enableFiltering: true,
     enableRowSelection: true,
     enableSelectAll: false,
     selectionRowHeaderWidth: 35,
     rowHeight: 35,
     showGridFooter:true, 
-  */
+ /*
     enableFiltering: true,
     enableRowSelection: true,
     enableRowHeaderSelection: false,
     modifierKeysToMultiSelect: true,
-    multiSelect: true,  
+    multiSelect: true,  */
     columnDefs: [
       { field: 'id', displayName: 'id', visible: true }, //0
       { field: 'name', displayName: 'Nombre', visible: true }, //0
@@ -56,8 +55,9 @@ app.controller('EmpleadosCtrl',function($rootScope, $scope, $location, $http){
     ],
     onRegisterApi: function(gridApi){
       $scope.gridApi = gridApi;
+      $scope.gridApi = {};
       gridApi.selection.on.rowSelectionChanged($scope,function(rows){
-        //alert(gridApi.selection.getSelectedRows()[0].id);
+        alert(gridApi.selection.getSelectedRows()[0].id);
           $scope.emp = gridApi.selection.getSelectedRows();         
       });
     },

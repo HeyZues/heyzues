@@ -13,4 +13,6 @@ class Employes extends Model
     	return Employes::find(DB::table($table)->max('id')); 
 	}
 	*/
+
+
 }

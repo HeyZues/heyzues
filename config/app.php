@@ -168,6 +168,7 @@ NEWS ADDS
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
         /*
          * Package Service Providers...
          */
@@ -232,7 +233,7 @@ NEWS ADDS
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
     ],
 
 ];
